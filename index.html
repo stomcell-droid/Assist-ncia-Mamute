@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manutenção de iPhone | Nome da Sua Assistência</title>
+  <meta name="description" content="Assistência técnica para iPhone: troca de tela, bateria, conector de carga e mais. Peça seu orçamento pelo WhatsApp.">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f4f6fa;
+      --text: #14181f;
+      --muted: #5b6472;
+      --brand: #0a6cff;
+      --brand-dark: #0850c2;
+      --card: #ffffff;
+      --border: #e3e7ee;
+      --radius: 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e1116;
+        --bg-soft: #151a22;
+        --text: #eef1f6;
+        --muted: #9aa4b2;
+        --card: #1a2029;
+        --border: #262e3a;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { width: min(1080px, 100% - 32px); margin-inline: auto; }
+    a { color: inherit; }
+
+    /* Cabeçalho */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .logo { font-weight: 800; font-size: 1.1rem; text-decoration: none; }
+    .logo span { color: var(--brand); }
+    .nav a.link { text-decoration: none; color: var(--muted); margin-left: 20px; font-size: .95rem; }
+    .nav a.link:hover { color: var(--text); }
+    @media (max-width: 640px) { .nav .links { display: none; } }
+
+    /* Botões */
+    .btn {
+      display: inline-block; padding: 14px 24px; border-radius: 999px;
+      background: var(--brand); color: #fff; text-decoration: none;
+      font-weight: 700; border: 0; cursor: pointer; font-size: 1rem;
+      transition: background .2s, transform .1s;
+    }
+    .btn:hover { background: var(--brand-dark); }
+    .btn:active { transform: scale(.98); }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn.ghost:hover { background: var(--bg-soft); }
+
+    /* Hero */
+    .hero { padding: 72px 0 56px; text-align: center; }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.15; letter-spacing: -.02em; }
+    .hero h1 span { color: var(--brand); }
+    .hero p { max-width: 620px; margin: 18px auto 30px; color: var(--muted); font-size: 1.1rem; }
+    .hero .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .badges { display: flex; gap: 10px 22px; justify-content: center; flex-wrap: wrap; margin-top: 34px; color: var(--muted); font-size: .92rem; }
+
+    /* Seções */
+    section { padding: 64px 0; }
+    section.soft { background: var(--bg-soft); }
+    h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); letter-spacing: -.01em; margin-bottom: 8px; }
+    .sub { color: var(--muted); margin-bottom: 32px; max-width: 620px; }
+
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+    }
+    .card .icon { font-size: 1.7rem; margin-bottom: 10px; }
+    .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: .95rem; }
+
+    /* Passos */
+    .steps { counter-reset: step; }
+    .step { position: relative; padding-left: 58px; }
+    .step::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 20px; top: 20px; transform: translateX(-4px);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--brand); color: #fff; font-weight: 800;
+      display: grid; place-items: center;
+    }
+
+    /* Formulário */
+    form {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; max-width: 560px;
+      display: grid; gap: 14px;
+    }
+    label { font-weight: 600; font-size: .92rem; display: grid; gap: 6px; }
+    input, select, textarea {
+      font: inherit; padding: 12px 14px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--bg); color: var(--text);
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--brand); border-color: transparent; }
+    textarea { resize: vertical; min-height: 90px; }
+
+    /* Contato */
+    .contact { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: start; }
+    .contact ul { list-style: none; display: grid; gap: 10px; color: var(--muted); }
+    .contact strong { color: var(--text); }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 0; color: var(--muted); font-size: .85rem; text-align: center; }
+
+    /* Botão flutuante do WhatsApp */
+    .wa-float {
+      position: fixed; right: 16px; bottom: 16px; z-index: 20;
+      background: #25d366; color: #fff; text-decoration: none; font-weight: 700;
+      padding: 14px 20px; border-radius: 999px; box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#topo">Nome<span>Phone</span></a>
+      <div class="links">
+        <a class="link" href="#servicos">Serviços</a>
+        <a class="link" href="#como-funciona">Como funciona</a>
+        <a class="link" href="#orcamento">Orçamento</a>
+        <a class="link" href="#contato">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="topo">
+
+    <!-- HERO -->
+    <div class="hero container">
+      <h1>Seu iPhone de volta<br><span>funcionando como novo</span></h1>
+      <p>Assistência técnica especializada em iPhone. Diagnóstico claro, orçamento sem surpresas e acompanhamento do reparo.</p>
+      <div class="actions">
+        <a class="btn" href="#orcamento">Pedir orçamento</a>
+        <a class="btn ghost" href="#servicos">Ver serviços</a>
+      </div>
+      <div class="badges">
+        <!-- Edite os selos abaixo conforme o que você realmente oferece -->
+        <span>✔ Garantia nos serviços</span>
+        <span>✔ Diagnóstico transparente</span>
+        <span>✔ Atendimento rápido</span>
+      </div>
+    </div>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="soft">
+      <div class="container">
+        <h2>Serviços de manutenção</h2>
+        <p class="sub">Os reparos mais comuns em iPhone. Se o seu problema não está na lista, é só perguntar.</p>
+        <div class="grid">
+          <div class="card"><div class="icon">📱</div><h3>Troca de tela</h3><p>Tela quebrada, manchada, com toque falhando ou imagem piscando.</p></div>
+          <div class="card"><div class="icon">🔋</div><h3>Troca de bateria</h3><p>Bateria que descarrega rápido, desliga sozinha ou está inchada.</p></div>
+          <div class="card"><div class="icon">🔌</div><h3>Conector de carga</h3><p>Não carrega, só carrega em certa posição ou o cabo não encaixa.</p></div>
+          <div class="card"><div class="icon">📷</div><h3>Câmeras</h3><p>Foto embaçada, câmera preta ou sem foco.</p></div>
+          <div class="card"><div class="icon">🔊</div><h3>Áudio e microfone</h3><p>Alto-falante abafado, sem som na ligação ou microfone falhando.</p></div>
+          <div class="card"><div class="icon">💧</div><h3>Contato com líquido</h3><p>Limpeza e avaliação após queda na água. Quanto antes, melhor.</p></div>
+          <div class="card"><div class="icon">🛠️</div><h3>Placa e outros defeitos</h3><p>Não liga, reinicia sozinho ou travou. Fazemos o diagnóstico.</p></div>
+          <div class="card"><div class="icon">🧼</div><h3>Limpeza e revisão</h3><p>Revisão geral e limpeza de entradas e alto-falantes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona">
+      <div class="container">
+        <h2>Como funciona</h2>
+        <p class="sub">Um processo simples, do contato à entrega.</p>
+        <div class="grid steps">
+          <div class="card step"><h3>Você conta o problema</h3><p>Pelo formulário ou pelo WhatsApp, com o modelo do aparelho.</p></div>
+          <div class="card step"><h3>Diagnóstico e orçamento</h3><p>Avaliamos o aparelho e passamos o valor e o prazo antes de qualquer reparo.</p></div>
+          <div class="card step"><h3>Reparo</h3><p>O serviço só começa com a sua aprovação.</p></div>
+          <div class="card step"><h3>Retirada com garantia</h3><p>Você testa o aparelho na hora da entrega.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORÇAMENTO -->
+    <section id="orcamento" class="soft">
+      <div class="container">
+        <h2>Peça seu orçamento</h2>
+        <p class="sub">Preencha e envie. A mensagem abre no WhatsApp já pronta para você.</p>
+
+        <form id="form-orcamento">
+          <label>Seu nome
+            <input type="text" name="nome" required placeholder="Ex.: Maria">
+          </label>
+          <label>Modelo do iPhone
+            <select name="modelo" required>
+              <option value="">Selecione</option>
+              <option>iPhone 6 / 6s</option>
+              <option>iPhone 7 / 8</option>
+              <option>iPhone X / XR / XS</option>
+              <option>iPhone 11</option>
+              <option>iPhone 12</option>
+              <option>iPhone 13</option>
+              <option>iPhone 14</option>
+              <option>iPhone 15</option>
+              <option>iPhone 16 ou mais novo</option>
+              <option>Outro / não sei</option>
+            </select>
+          </label>
+          <label>Qual é o problema?
+            <select name="servico" required>
+              <option value="">Selecione</option>
+              <option>Troca de tela</option>
+              <option>Troca de bateria</option>
+              <option>Conector de carga</option>
+              <option>Câmera</option>
+              <option>Áudio / microfone</option>
+              <option>Caiu na água</option>
+              <option>Não liga / outro defeito</option>
+            </select>
+          </label>
+          <label>Detalhes (opcional)
+            <textarea name="detalhes" placeholder="Descreva o que está acontecendo"></textarea>
+          </label>
+          <button class="btn" type="submit">Enviar pelo WhatsApp</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato">
+      <div class="container contact">
+        <div>
+          <h2>Fale com a gente</h2>
+          <p class="sub">Atendimento por WhatsApp ou na loja.</p>
+          <ul>
+            <!-- Troque pelos seus dados reais -->
+            <li><strong>WhatsApp:</strong> (00) 00000-0000</li>
+            <li><strong>Endereço:</strong> Rua Exemplo, 123 — Bairro, Cidade/UF</li>
+            <li><strong>Horário:</strong> Seg a Sex, 9h às 18h · Sáb, 9h às 13h</li>
+          </ul>
+        </div>
+        <div>
+          <!-- Para mostrar o mapa: no Google Maps, clique em Compartilhar > Incorporar um mapa,
+               copie o <iframe> e cole aqui no lugar deste bloco. -->
+          <div class="card"><h3>📍 Mapa</h3><p>Cole aqui o mapa incorporado do Google Maps.</p></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="ano"></span> Nome da Sua Assistência · CNPJ 00.000.000/0000-00<br>
+      Assistência independente, sem vínculo com a Apple Inc. iPhone é marca registrada da Apple Inc.
+    </div>
+  </footer>
+
+  <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+
+  <script>
+    // ====== CONFIGURE AQUI ======
+    // Número com código do país e DDD, só dígitos. Ex.: 5581999999999
+    const WHATSAPP = "5500000000000";
+    // ============================
+
+    document.getElementById("ano").textContent = new Date().getFullYear();
+
+    const base = "https://wa.me/" + WHATSAPP;
+    document.getElementById("wa-float").href =
+      base + "?text=" + encodeURIComponent("Olá! Gostaria de um orçamento para o meu iPhone.");
+
+    document.getElementById("form-orcamento").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const d = new FormData(e.target);
+      let msg =
+        "Olá! Meu nome é " + d.get("nome") + ".\n" +
+        "Modelo: " + d.get("modelo") + "\n" +
+        "Problema: " + d.get("servico");
+      const det = (d.get("detalhes") || "").trim();
+      if (det) msg += "\nDetalhes: " + det;
+      msg += "\nPode me passar um orçamento?";
+      window.open(base + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
